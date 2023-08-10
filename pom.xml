@@ -40,6 +40,9 @@
                     <goals>
                         <goal>repackage</goal>
                     </goals>
+                    <configuration>
+                        <finalName>Uber</finalName>
+                    </configuration>
                 </execution>
             </executions>
 			</plugin>
