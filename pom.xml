@@ -40,9 +40,6 @@
                     <goals>
                         <goal>repackage</goal>
                     </goals>
-                    <configuration>
-                        <finalName>demo-counter-app</finalName>
-                    </configuration>
                 </execution>
             </executions>
 			</plugin>
