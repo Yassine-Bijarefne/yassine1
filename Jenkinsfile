@@ -4,15 +4,10 @@ pipeline{
     
     stages {
 
-         stage ('Initialize & SonarQube Scan') {
+         stage ('Scan') {
                 steps {
-                    def scannerHome = tool 'sonarScanner';
-                    withSonarQubeEnv('My SonarQube Server') {
-
-                        bat """
-                        ${scannerHome}/bin/sonar-runner.bat
-                        pip install -r requirements.txt
-                        """
+                    withSonarQubeEnv(installationName:'sonarqube') {
+                    sh 'mvn sonar:sonar'
                     }
                 }
                  
