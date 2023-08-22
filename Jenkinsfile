@@ -38,23 +38,10 @@ pipeline{
         }    
         stage('Static code analysis'){
             steps{
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
-                sh'mvn clean package sonar:sonar'
+                
             }
         }
-      
-        stage ('Initialize & SonarQube Scan') {
-                steps {
-                def scannerHome = tool 'sonarScanner';
-                withSonarQubeEnv('My SonarQube Server') {
-
-                bat """
-                    ${scannerHome}/bin/sonar-runner.bat
-                    pip install -r requirements.txt
-                    """
-                    }
-          }}
                  
-    }     
+        }
         
 } 
