@@ -38,18 +38,18 @@ pipeline{
             }
         }   
 
-         stage ('Scan') {
+         stage ('SonarQube Scan') {
                 steps {
                     withSonarQubeEnv(installationName:'sonarqube') {
-                    sh 'mvn clean package sonar:sonar'
+                        sh 'mvn clean package sonar:sonar'
                     }
                 }
                  
         } 
         stage('Quality gate status'){
             steps{
-                scripts{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-ID'
+                timeout(time: 2,unit: 'MINUTES'){
+                    waitForQualityGate abortPipeline:true
                 }
             }
         }
