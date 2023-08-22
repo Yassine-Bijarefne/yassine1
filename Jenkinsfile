@@ -36,11 +36,17 @@ pipeline{
                 sh 'mvn clean install'
             }
         }    
-        stage('Static code analysis'){
-            steps{
-                
-            }
-        }
+            stage ('Initialize & SonarQube Scan') {
+                steps {
+                def scannerHome = tool 'sonarScanner';
+                withSonarQubeEnv('My SonarQube Server') {
+
+                bat """
+                    ${scannerHome}/bin/sonar-runner.bat
+                    pip install -r requirements.txt
+                    """
+                    }
+          }
                  
         }
         
