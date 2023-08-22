@@ -46,13 +46,19 @@ pipeline{
                 }
                  
         } 
-        stage('Quality gate status'){
-            steps{
-                script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-ID'
+        stage('Quality Gate') {
+            steps {
+                script {
+                    def qg = waitForQualityGate sonarInstanceName: 'quality-gate'
+                    
+                    if (qg.status != 'OK') {
+                        error "Quality Gate failed: ${qg.status}"
+                    } else {
+                        echo "Quality Gate passed: ${qg.status}"
+                    }
                 }
-                           
             }
         }
+
     }     
 }
