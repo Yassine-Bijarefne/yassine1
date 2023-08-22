@@ -31,13 +31,12 @@ pipeline{
                 }
             }
         }
-        stage{'Maven build'}(
-
-            steps{
+        stage{'Maven build'}{
+              steps{
                 sh 'mvn clean install'
             }
-        )
-                  
+        }    
+                 
         }
         
 } 
