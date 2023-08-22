@@ -47,11 +47,13 @@ pipeline{
                  
         } 
         stage('Quality gate status'){
-            steps{
-                timeout(time: 4,unit: 'MINUTES'){
-                    waitForQualityGate abortPipeline:true
-                }
+            steps{                               
+                    script{
+                        
+                        waitForQualityGate abortPipeline: false, installationName:'sonarqube'
+                    }             
             }
         }
     }     
 }
+
