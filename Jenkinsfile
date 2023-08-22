@@ -3,6 +3,20 @@ pipeline{
     agent any 
     
     stages {
+
+         stage ('Initialize & SonarQube Scan') {
+                steps {
+                    def scannerHome = tool 'sonarScanner';
+                    withSonarQubeEnv('My SonarQube Server') {
+
+                        bat """
+                        ${scannerHome}/bin/sonar-runner.bat
+                        pip install -r requirements.txt
+                        """
+                    }
+                }
+                 
+        }
         
         stage('Git Checkout'){
             
@@ -36,18 +50,5 @@ pipeline{
                 sh 'mvn clean install'
             }
         }    
-            stage ('Initialize & SonarQube Scan') {
-                steps {
-                def scannerHome = tool 'sonarScanner';
-                withSonarQubeEnv('My SonarQube Server') {
-
-                bat """
-                    ${scannerHome}/bin/sonar-runner.bat
-                    pip install -r requirements.txt
-                    """
-                    }
-          }
-                 
-        }
-        
-} 
+    }     
+}
