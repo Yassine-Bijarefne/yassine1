@@ -42,8 +42,8 @@ pipeline{
                 sh'mvn clean package sonar:sonar'
             }
         }
-        stages {
-            stage ('Initialize & SonarQube Scan') {
+      
+        stage ('Initialize & SonarQube Scan') {
                 steps {
                 def scannerHome = tool 'sonarScanner';
                 withSonarQubeEnv('My SonarQube Server') {
@@ -53,8 +53,8 @@ pipeline{
                     pip install -r requirements.txt
                     """
                     }
-          }
+          }}
                  
-        }
+    }     
         
 } 
