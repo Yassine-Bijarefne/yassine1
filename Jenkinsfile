@@ -50,7 +50,7 @@ pipeline{
             steps{                               
                     script{
                         
-                        waitForQualityGate abortPipeline: false, installationName:'sonarqube'
+                        waitForQualityGate abortPipeline: true
                     }             
             }
         }
