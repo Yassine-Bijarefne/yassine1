@@ -4,14 +4,6 @@ pipeline{
     
     stages {
 
-         stage ('Scan') {
-                steps {
-                    withSonarQubeEnv(installationName:'sonarqube') {
-                    sh 'mvn clean sonar:sonar'
-                    }
-                }
-                 
-        }
         
         stage('Git Checkout'){
             
@@ -44,6 +36,15 @@ pipeline{
               steps{
                 sh 'mvn clean install'
             }
-        }    
+        }   
+
+         stage ('Scan') {
+                steps {
+                    withSonarQubeEnv(installationName:'sonarqube') {
+                    sh 'mvn clean package sonar:sonar'
+                    }
+                }
+                 
+        } 
     }     
 }
