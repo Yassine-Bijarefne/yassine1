@@ -41,9 +41,6 @@
 								<goal>integration-test</goal>
 								<goal>verify</goal>
 							</goals>
-							<configuration>
-								<finalname>Uber</finalname>
-							</configuration>
 						</execution>
 					</executions>
 				</plugin>
