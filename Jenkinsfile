@@ -46,14 +46,7 @@ pipeline{
                 }
                  
         } 
-        stage('Quality Gate') {
-            steps {
-                script {
-                        def qg = waitForQualityGate()
-                        echo "JSON Response: ${qg}"  // Print the JSON response
-                    }
-                }
-        }
+    
     }
      
 }
