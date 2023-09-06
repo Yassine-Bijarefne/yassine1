@@ -69,7 +69,7 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                        sh "docker build -t yassinebija/pipeline_project:$BUILD_NUMBER ."// some block
+                        sh "docker build -t yassinebija/pipeline_project ."// some block
                   }
                 }
             }
