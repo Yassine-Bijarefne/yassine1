@@ -70,7 +70,7 @@ pipeline{
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'project') {
-                        sh "docker build -t yassinebija/pipeline_project:tag123"// some block
+                        sh "docker build -t yassinebija/pipeline_project:tag123 ."// some block
                         sh "docker push"
                   }
                 }
