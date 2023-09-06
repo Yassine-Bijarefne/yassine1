@@ -66,15 +66,27 @@ pipeline{
                     }
             }
         }
-        stage('Docker image build') {
-            steps {
-                script {
-                    sh "docker image build -t $JOB_NAME:v1.$BUILD_ID"
-                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
-                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
+        pipeline {
+            agent any
+            stages {
+                stage('Find Dockerfile') {
+                    steps {
+                        script {
+                            // Search for dockerfile by filename (lowercase "d")
+                            def dockerfiles = findFiles(glob: '**/dockerfile')
+
+                            if (dockerfiles.size() > 0) {
+                                def dockerfilePath = dockerfiles[0].path
+                                echo "Dockerfile found at: ${dockerfilePath}"
+                            } else {
+                                error "Dockerfile not found in workspace."
+                            }
+                        }
+                    }
                 }
             }
         }
+
 
     
     }
