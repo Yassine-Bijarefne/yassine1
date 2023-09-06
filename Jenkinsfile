@@ -66,23 +66,11 @@ pipeline{
                     }
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Define Docker image name and tag
-                    def imageNameWithTag = "myapp:v1.0"
+         stage('Build image') {
+            /* This builds the actual image; synonymous to
+            * docker build on the command line */
 
-                    // Build the Docker image and capture the result
-                    def dockerImage = docker.build(imageNameWithTag, "-f path/to/Dockerfile .")
-
-                    // Capture the image ID and tag
-                    def imageId = dockerImage.id
-                    def imageTag = dockerImage.getTag()
-
-                    echo "Image ID: ${imageId}"
-                    echo "Image Tag: ${imageTag}"
-                }
-            }
+            app = docker.build("PipelineProject")
         }
        
 
