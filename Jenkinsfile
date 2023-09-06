@@ -73,12 +73,10 @@ pipeline{
                     def dockerfilePath = "/var/jenkins_home/workspace/project/dockerfile"  // Update with the relative path to your Dockerfile
 
                     // Build the Docker image
-                    def dockerBuildCommand = "docker build -t ${imageNameWithTag} -f ${dockerfilePath} ."
-                    sh dockerBuildCommand
+                    docker.build(imageNameWithTag, "-f ${dockerfilePath} .")
                 }
             }
         }
-
 
     
     }
