@@ -73,7 +73,7 @@ pipeline{
              steps {
                 script {
                     // Define the Docker build step here
-                    app = docker.build("yassinebija/pipeline_project:latest")
+                    sh'docker --version'
                 }
             }
         }
