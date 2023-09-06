@@ -65,23 +65,19 @@ pipeline{
                             version: '1.1.0'
                     }
             }
-        }
-        
-    
-        stage('Find Dockerfile') {
+        } 
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    def workspacePath = pwd()
-                    def dockerfileFound = fileExists("${workspacePath}/dockerfile")
+                    def dockerfilePath = "/var/jenkins_home/workspace/project/dockerfile"
+                    def imageNameWithTag = "project:v1.67"  // Update with your desired image name and tag
 
-                    if (dockerfileFound) {
-                        echo "Dockerfile found at: ${workspacePath}/dockerfile"
-                    } else {
-                        error "Dockerfile not found in workspace."
-                    }
+                    // Build the Docker image using the Dockerfile
+                    def dockerBuildCommand = "docker build -t ${imageNameWithTag} -f ${dockerfilePath} ."
+                    sh dockerBuildCommand
                 }
             }
         }
-    }
-     
+    }     
 }
