@@ -69,13 +69,12 @@ pipeline{
         stage('Docker image build') {
             steps {
                 script {
-                    def dockerBinaryPath = '/usr/bin/docker'  // Update to the correct path
-                    sh "${dockerBinaryPath} image build -t project:v1.67 ."
+                    sh "docker image build -t $JOB_NAME:v1.$BUILD_ID"
+                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
+                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
                 }
             }
         }
-
-
 
     
     }
