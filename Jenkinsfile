@@ -19,7 +19,16 @@ pipeline{
                 }
             }
         }
-        
+        stage('UNIT testing'){
+            
+            steps{
+                
+                script{
+                    
+                    sh 'mvn test'
+                }
+            }
+        }
        stage('Integration testing'){
             
             steps{
