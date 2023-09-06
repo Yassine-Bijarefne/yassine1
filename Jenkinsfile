@@ -66,6 +66,19 @@ pipeline{
                     }
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    def imageNameWithTag = "myapp:v1.0"  // Update with your desired image name and tag
+                    def dockerfilePath = "/var/jenkins_home/workspace/project/dockerfile"  // Update with the relative path to your Dockerfile
+
+                    // Build the Docker image
+                    def dockerBuildCommand = "docker build -t ${imageNameWithTag} -f ${dockerfilePath} ."
+                    sh dockerBuildCommand
+                }
+            }
+        }
+
 
     
     }
