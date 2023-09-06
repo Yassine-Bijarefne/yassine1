@@ -66,12 +66,15 @@ pipeline{
                     }
             }
         }
-        stage('Check Docker Version') {
+        stage('Docker image build') {
             steps {
-                sh "docker --version"
+                script {
+                    sh "docker image build -t $JOB_NAME:v1.$BUILD_ID ."
+                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
+                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
+                }
             }
         }
-
 
     
     }
