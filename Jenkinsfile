@@ -66,27 +66,22 @@ pipeline{
                     }
             }
         }
-        pipeline {
-            agent any
-            stages {
-                stage('Find Dockerfile') {
-                    steps {
-                        script {
+        
+        stage('Find Dockerfile') {
+            steps {
+                script {
                             // Search for dockerfile by filename (lowercase "d")
-                            def dockerfiles = findFiles(glob: '**/dockerfile')
+                    def dockerfiles = findFiles(glob: '**/dockerfile')
 
-                            if (dockerfiles.size() > 0) {
-                                def dockerfilePath = dockerfiles[0].path
-                                echo "Dockerfile found at: ${dockerfilePath}"
-                            } else {
-                                error "Dockerfile not found in workspace."
+                    if (dockerfiles.size() > 0) {
+                            def dockerfilePath = dockerfiles[0].path
+                            echo "Dockerfile found at: ${dockerfilePath}"
+                    } else {
+                            error "Dockerfile not found in workspace."
                             }
                         }
                     }
-                }
-            }
-        }
-
+         }
 
     
     }
