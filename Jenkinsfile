@@ -69,8 +69,14 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                        sh "docker build -t pipeline_project ."// some block
-                  }
+                    // Define the image name and tag
+                    def imageNameWithTag = "my-springboot-app:1.0"
+
+                    // Path to the Dockerfile within the Jenkins workspace
+                    def dockerfilePath = "${WORKSPACE}/dockerfile"  // Updated path
+
+                    // Build the Docker image
+                    sh "docker build -t ${imageNameWithTag} -f ${dockerfilePath} ${WORKSPACE}"
                 }
             }
         }
