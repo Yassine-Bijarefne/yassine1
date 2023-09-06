@@ -69,9 +69,7 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'project') {
-                        sh "docker build -t yassinebija/pipeline_project:tag123 ."// some block
-                        sh "docker push"
+                        sh "docker build -t yassinebija/pipeline_project:$BUILD_NUMBER ."// some block
                   }
                 }
             }
