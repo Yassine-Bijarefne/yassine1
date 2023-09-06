@@ -67,23 +67,21 @@ pipeline{
             }
         }
         
+    
         stage('Find Dockerfile') {
             steps {
                 script {
-                            // Search for dockerfile by filename (lowercase "d")
-                    def dockerfiles = findFiles(glob: '**/dockerfile')
+                    def workspacePath = pwd()
+                    def dockerfileFound = fileExists("${workspacePath}/dockerfile")
 
-                    if (dockerfiles.size() > 0) {
-                            def dockerfilePath = dockerfiles[0].path
-                            echo "Dockerfile found at: ${dockerfilePath}"
+                    if (dockerfileFound) {
+                        echo "Dockerfile found at: ${workspacePath}/dockerfile"
                     } else {
-                            error "Dockerfile not found in workspace."
-                            }
-                        }
+                        error "Dockerfile not found in workspace."
                     }
-         }
-
-    
+                }
+            }
+        }
     }
      
 }
