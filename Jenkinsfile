@@ -69,6 +69,11 @@ pipeline{
         stage('Docker image build') {
             steps {
                 script {
+                    // Add Docker binary directory to PATH
+                    def dockerBinaryDir = '/usr/bin'  // Update this to the correct directory
+                    sh "export PATH=\$PATH:$dockerBinaryDir"
+                    
+                    // Now run Docker commands
                     sh "docker image build -t $JOB_NAME:v1.$BUILD_ID"
                     sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
                     sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
