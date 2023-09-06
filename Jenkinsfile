@@ -69,7 +69,7 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                        sh "docker build -t yassinebija/pipeline_project ."// some block
+                        sh "docker build -t pipeline_project ."// some block
                   }
                 }
             }
