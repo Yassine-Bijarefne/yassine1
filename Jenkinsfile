@@ -66,15 +66,12 @@ pipeline{
                     }
             }
         }
-        stage('Docker image build') {
+        stage('Check Environment Variables') {
             steps {
-                script {
-                    sh "docker image build -t $JOB_NAME:v1.$BUILD_ID ."
-                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
-                    sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
-                }
+                sh 'env'
             }
         }
+
 
     
     }
