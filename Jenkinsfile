@@ -66,11 +66,15 @@ pipeline{
                     }
             }
         }
-        stage('Check Environment Variables') {
+        stage('Docker image build') {
             steps {
-                sh 'env'
+                script {
+                    def dockerBinaryPath = '/usr/bin/docker'  // Update to the correct path
+                    sh "${dockerBinaryPath} image build -t project:v1.67 ."
+                }
             }
         }
+
 
 
     
