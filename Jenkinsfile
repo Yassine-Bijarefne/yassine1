@@ -69,11 +69,10 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                    def imageNameWithTag = "myapp:v1.0"  // Update with your desired image name and tag
-                    def dockerfilePath = "/var/jenkins_home/workspace/project/dockerfile"  // Update with the relative path to your Dockerfile
-
-                    // Build the Docker image
-                    docker.build(imageNameWithTag, "-f ${dockerfilePath} .")
+                    withDockerRegistry(credentialsId: 'project') {
+                        sh "docker build -t yassinebija/pipeline_project:tag123"// some block
+                        sh "docker push"
+                  }
                 }
             }
         }
