@@ -67,14 +67,11 @@ pipeline{
             }
         }
         stage('Build Docker Image') {
-            steps {
-                script {
-                        sh "docker build -t pipeline_project ."// some block
-                  }
-                }
-            }
+            
+            app = docker.build("yassinebija/pipeline_project:latest")
+               
         }
 
     
     }
-     
+}  
