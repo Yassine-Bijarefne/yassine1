@@ -56,6 +56,19 @@ pipeline{
                 }
                  
         } 
+        stage('SonarQube scan') {
+            steps {
+                script {
+                    def mvnHome = tool name: 'Maven', type: 'maven'
+                    def sonarqubeScannerHome = tool name: 'YourSonarQubeInstallationName', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'
+
+                    withSonarQubeEnv(installationName: 'YourSonarQubeInstallationName') {
+                        sh "${mvnHome}/bin/mvn clean package sonar:sonar"
+                    }
+                }
+            }
+        }
+
         stage('Upload jar file to nexus'){
             steps{
                     script{
