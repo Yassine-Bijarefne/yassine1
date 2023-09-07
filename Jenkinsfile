@@ -78,15 +78,28 @@ pipeline{
                     }
             }     
         }
-        stage('Docker Image Build'){
-            steps{
-                    script{
-                        sh "docker image build -t $JOB_NAME:v1.$BUILD_ID ."
-                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
-                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
-                    }
-            }     
+       stage('Docker Image Build') {
+        steps {
+            script {
+                // Define the name of the Docker tool installation in Jenkins
+                def dockerToolName = 'docker'
+
+                // Install and configure the Docker tool (if not already installed)
+                def dockerInstallation = tool name: dockerToolName, type: 'Tool Type'
+
+                // Check if Docker installation was successful
+                if (dockerInstallation) {
+                    // Use the Docker installation to build and tag the image
+                    sh "${dockerInstallation}/bin/docker image build -t $JOB_NAME:v1.$BUILD_ID ."
+                    sh "${dockerInstallation}/bin/docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
+                    sh "${dockerInstallation}/bin/docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
+                } else {
+                    error "Docker installation failed."
+                }
+            }
         }
+    }
+
 
     }
 }  
