@@ -28,11 +28,15 @@ pipeline{
             }
         }
 
-        stage('Maven build'){
-              steps{
-                sh 'mvn clean install'
+        stage('Maven build') {
+            steps {
+                script {
+                    def mvnHome = tool name: 'maven', type: 'maven'
+                    sh "${mvnHome}/bin/mvn clean install"
+                }
             }
-        }   
+        }
+   
         stage('Integration testing'){
 
             steps{
