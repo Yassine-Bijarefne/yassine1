@@ -19,9 +19,13 @@ pipeline{
                 }
             }
         }
-        stage('Maven package'){
-            def mvnHome = tool name: 'Maven', type: 'maven'
-            sh "${mvnHome}/bin/mvn package"
+        stage('Maven package') {
+            steps {
+                script {
+                    def mvnHome = tool name: 'Maven', type: 'maven'
+                    sh "${mvnHome}/bin/mvn package"
+                }
+            }
         }
 
         stage('Maven build'){
