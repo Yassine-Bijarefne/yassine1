@@ -47,15 +47,7 @@ pipeline{
                 }
             }
         }
-        stage ('SonarQube scan') {
-                steps {
-                    withSonarQubeEnv(installationName:'sonar') {
-                        def mvnHome = tool name: 'maven', type: 'maven'
-                        sh "${mvnHome}/bin/mvn clean package sonar:sonar"
-                    }
-                }
-                 
-        } 
+
         stage('SonarQube scan') {
             steps {
                 script {
