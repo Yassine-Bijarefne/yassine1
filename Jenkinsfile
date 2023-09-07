@@ -22,7 +22,7 @@ pipeline{
         stage('Maven package') {
             steps {
                 script {
-                    def mvnHome = tool name: 'Maven', type: 'maven'
+                    def mvnHome = tool name: 'maven', type: 'maven'
                     sh "${mvnHome}/bin/mvn package"
                 }
             }
