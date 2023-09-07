@@ -76,10 +76,18 @@ pipeline{
                             repository: 'project-release',
                             version: '1.1.0'
                     }
-            }
-      
-    
+            }     
         }
+        stage('Docker Image Build'){
+            steps{
+                    script{
+                        sh "docker image build -t $JOB_NAME:v1.$BUILD_ID ."
+                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:v1.$BUILD_ID"
+                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID YassineBija/$JOB_NAME:latest"
+                    }
+            }     
+        }
+
     }
 }  
 
