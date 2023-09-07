@@ -68,7 +68,7 @@ pipeline{
                                 artifactId: 'springboot', classifier: '', file: 'target/springboot-1.0.0.jar', type: 'jar'
                             ]
                             ],
-                            credentialsId: 'nexus-project',
+                            credentialsId: 'nexus-ID',
                             groupId: 'com.example',
                             nexusUrl: '192.168.56.5:8081/',
                             nexusVersion: 'nexus3',
