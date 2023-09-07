@@ -42,8 +42,8 @@ pipeline{
             steps{
                 
                 script{
-                    
-                    sh 'mvn verify -DskipUnitTests'
+                    def mvnHome = tool name: 'maven', type: 'maven'
+                    sh "${mvnHome}/bin/mvn verify -DskipUnitTests"
                 }
             }
         }
